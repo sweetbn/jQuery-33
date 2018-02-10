@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>导航条下拉</title>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.main{
+			margin: 0 auto;
+			width: 1190px;
+		}
+		.top{
+			position: fixed;
+			width: 40px;
+			height: 40px;
+			right: 30px;
+			bottom: 30px;
+			overflow: hidden;
+			display: none;
+		}
+		.top img:hover{
+			position: absolute;
+			top: -40px;
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+	<div class="head">
+		<img src="img/tb1.jpg">
+	</div>
+	<div class="nav">
+		<img src="img/tb2.jpg">
+	</div>
+	<div class="content">
+		<img src="img/tb3.jpg">
+	</div>
+</div>
+
+
+<div class="top">
+	<a href="javascript:"><img src="img/top_bg.png"></a>
+</div>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		//console.log($('.head').height());
+		$(window).scroll(function(){
+			if ($(this).scrollTop()>$('.head').height()) {
+				$('.nav').css('position','fixed').css('top','0px');
+				$('.content').css('marginTop',$('.nav').height());
+			}
+			else{
+				$('.nav').css('position','static');
+				$('.content').css('marginTop','0px');
+			}
+
+			if ($(this).scrollTop()>$(window).height()) {
+				$('.top').fadeIn(800);
+			}
+			else{
+				$('.top').fadeOut(800);
+			}
+		});
+
+		$('.top').click(function(){
+			$('html,body').animate({scrollTop:0},1000);
+			// $(window).scrollTop(0);
+		});
+	});
+</script>
+</body>
+</html>
