@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>五角星评分</title>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.stars li{
+			text-decoration: none;
+			display: inline-block;
+			font-size: 30px;
+			color: pink;
+			cursor: default;
+		}
+	</style>
+</head>
+<body>
+<ul class="stars">
+	<li>☆</li>
+	<li>☆</li>
+	<li>☆</li>
+	<li>☆</li>
+	<li>☆</li>
+</ul>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$('.stars li').on('mouseenter',function(){
+			// $(this).text('★').prevAll().text('★');
+			// $(this).nextAll().text('☆');
+			$(this).text('★').prevAll().text('★').end().nextAll().text('☆');
+		});
+		$('.stars li').on('mouseleave',function(){
+			if (!$(this).hasClass('b')) {
+				$('.stars li').text('☆');
+			}
+		});
+
+		$('.stars li').on('click',function(){
+			$(this).text('★').prevAll().text('★').end().addClass('b').siblings().removeClass('b');
+			$(this).nextAll().text('☆');
+		});
+	});
+</script>
+</body>
+</html>
