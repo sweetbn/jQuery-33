@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>表格删除</title>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.wrap{
+			width: 500px;
+			height: 500px;
+			margin: 100px auto;
+			text-align: center;
+		}
+		.wrap table{
+			width: 300px;
+			/*border: 1px solid #000;*/
+			box-sizing: border-box;
+			border-spacing: 0;
+			margin: 0 auto;
+		}
+		th,td{
+			border: 1px solid #eee;
+			padding: 10px;
+		}
+
+		.wrap table thead tr{
+			height: 40px;
+			background-color: pink;
+			color: #fff;
+			font: bold 16px '微软雅黑';
+		}
+
+		.wrap tbody tr{
+			height: 35px;
+			background-color: #ddd;
+			font:14px '微软雅黑';
+		}
+		.wrap tbody tr:hover{
+			background-color: #eee;
+		}
+		.btn input{
+			
+		}
+	</style>
+</head>
+<body>
+<div class="wrap">
+	<div class="btn">
+		<input type="button" value="清空" id="clear">
+		<input type="button" value="添加" id="add">
+	</div>
+	<table>
+		<thead>
+			<tr>
+				<th>课程名称</th>
+				<th>所属学院</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>JavaScript</td>
+				<td>慕课网</td>
+				<td><a href="javascript:">DELETE</a></td>
+			</tr>
+			<tr>
+				<td>html5</td>
+				<td>慕课网</td>
+				<td><a href="javascript:">DELETE</a></td>
+			</tr>
+			<tr>
+				<td>jQuery</td>
+				<td>慕课网</td>
+				<td><a href="javascript:">DELETE</a></td>
+			</tr>
+			<tr>
+				<td>css</td>
+				<td>慕课网</td>
+				<td><a href="javascript:">DELETE</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$('#add').on('click',function(){
+			$('<tr><td>bootstrap</td><td>慕课网</td><td><a href="javascript:">DELETE</a></td></tr>').appendTo('tbody');
+		});
+
+		$('#clear').on('click',function(){
+			$('tbody').empty();
+		});
+
+
+		// $('tbody a').on('click',function(){
+		// 	$(this).parent().parent('tr').remove();
+		// });  对于新加进来的元素无效，所以用委托事件
+
+		$('tbody').on('click','td a',function(){//这是委托事件（a本身没有注册事件，点击之后冒泡到父元素找到委托事件）
+			$(this).parent().parent('tr').remove();
+		});
+	});
+	
+</script>
+</body>
+</html>
