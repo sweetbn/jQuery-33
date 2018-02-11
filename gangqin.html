@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>钢琴案例</title>
+	<link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/7.0.0/normalize.css">
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.main{
+			width: 1000px;
+			height: 50px;
+			background-color: #aaa;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.main li{
+			display: inline-block;
+			text-decoration: none;
+			width: 80px;
+			line-height: 50px;
+			font-size: 22px;
+			/*color: #fff;*/
+			/*margin:0 5px;*/
+			font-family: '楷体';
+			position: relative;
+			overflow: hidden;
+		}
+		.main li a{
+			text-decoration: none;
+			display: block;
+			color: #fff;
+			line-height: 50px;
+			z-index: 10;
+			position: relative;
+			width: 100%;
+		}
+		.main span{
+			display: block;
+			position: absolute;
+			height: 50px;
+			width:80px; 
+			top:50px;
+			background-color: pink;
+			left: 0;
+			/*display: none;*/
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+	<ul>
+		<li><a href="javascript:">导航1</a><span></span></li>
+		<li><a href="javascript:">导航2</a><span></span></li>
+		<li><a href="javascript:">导航3</a><span></span></li>
+		<li><a href="javascript:">导航4</a><span></span></li>
+		<li><a href="javascript:">导航5</a><span></span></li>
+		<li><a href="javascript:">导航6</a><span></span></li>
+		<li><a href="javascript:">导航7</a><span></span></li>
+		<li><a href="javascript:">导航8</a><span></span></li>
+		<li><a href="javascript:">导航9</a><span></span></li>
+	</ul>
+</div>
+<audio src="pb.mp3"></audio>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$('.main li').on('mouseenter',function(){
+			$(this).find('span').stop().animate({top:0});
+			// $('audio').load();
+			$('audio').get(0).load();
+			$('audio').get(0).play();
+		});
+
+		$('.main li').on('mouseleave',function(){
+			$(this).find('span').stop().animate({top:60});
+		});
+
+		var $a=true;
+		$(document).on('keydown',function(e){
+			if (e.keyCode>=49&&e.keyCode<=57&&$a) {
+				$a=false;
+				console.log('hehe');
+				$('.main li').eq(e.keyCode-49).trigger('mouseenter');
+			}
+		});
+		
+		$(document).on('keyup',function(e){
+			if (e.keyCode>=49&&e.keyCode<=57) {
+				$('.main li').eq(e.keyCode-49).trigger('mouseleave');
+			}
+			$a=true;
+		});
+	});
+</script>
+</body>
+</html>
